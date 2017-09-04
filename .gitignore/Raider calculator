@@ -1,0 +1,46 @@
+// World of Warcraft Raider calculater - DPS
+
+// Version 1.0
+// 01/09-2017
+// Udviklet af: Rune Jessen Wiuff
+
+// Dette app er udviklet til at hjælpe raidleaders i Sober Kannibals @ Draenor-EU,
+// til at udregne hvad der behøves af DPS/Damage per spiller på et raid.
+// Appet er udviklet i XCode. Kodesproget er Swift
+
+// Lets begin!
+let minute = 60
+
+// Raid setup - Dette kan du ændre så det passer til pågældende raid
+
+let TT = 2  // Tanks
+let HH = 3  // Healers
+let DD = 9  // Damage Dealers
+let raiders = TT + HH + DD // Udregner hvor mange du har på holdet i alt!
+
+// Her kan du indsætte hvor meget bossen har i liv inden pull.
+let boss = 2190000000
+
+// Forventede minutter det tager at slå bossen ihjel. En Enrage timer minus 1 minut ville være ideelt.
+let bossTime = 5  // ToS : 5-6 minutter på de fleste bosser er normalt - Avatar og KJ er det normalt med 7-9 minutter
+
+//--------------------------------------------------------------------------------------------------------------
+// Udregninger til raid setup - Dette burde ikke ændres medmindre du ved hvad du gør!!!!
+// Tank DPS udregning
+let tankDmgPr = 350000 * minute  // DPS per tank
+let healerDmgPr = 110000 * minute  // DPS per healer
+let tankDMG = tankDmgPr * TT
+let healerDMG = healerDmgPr * HH
+
+// Damage/DPS udregning
+let bossDPS = bossTime * minute
+let bossTotalHealth = boss - tankDMG - healerDMG // Boss health efter tanks og healers DMG er taget ud.
+let bossDamagePrDD = bossTotalHealth / DD // Denne udregning finder ud af hvor meget DMG hver DD skal lave før bossen dør.
+let bossDamageDPS = bossDamagePrDD / bossDPS // Denne udregning viser hvad hver DD skal lave i average DPS.
+
+// Print til console så vi forstår den data vi har skrevet ind i programmet
+print("Der \(raiders) raiders.\nHoldet er opdelt således:\n\(TT) tanks\n\(HH) healers\n\(DD) damage dealers")
+print("\nBossen har \(boss)HP i alt.")
+print("Med en cirka udregning af hvor meget damage tanks og healers laver, kommer bossens liv til at være \(bossTotalHealth)HP.")
+print("Det vil sige at hver DPS skal lave \(bossDamagePrDD) damage før bossen dør.")
+print("Altså hver Damage dealer skal lave \(bossDamageDPS)DPS i gennemsnit over alle \(bossTime) minutter.")
