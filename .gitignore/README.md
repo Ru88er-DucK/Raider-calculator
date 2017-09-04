@@ -1,3 +1,3 @@
 # Raider-calculator
 Calculates how much DPS you need to kill a boss on raids
-Its very simple!
+Very simple. But its in danish. Maybe i should translate it to english....
